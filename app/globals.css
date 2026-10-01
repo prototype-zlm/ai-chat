@@ -1,0 +1,318 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* 定义一个通用消息样式 */
+.message {
+  line-height: 1.5;
+  border-radius: 12px;
+  margin-bottom: 5px;
+}
+.message.user {
+  max-width: 70%;
+  background-color: #f3f3f3;
+  color: #0D0D0D;
+  padding: 12px;
+  align-self: flex-end;
+}
+.message.assistant {
+  width: 100%;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+.message.loading {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background-color: #efefef;
+  color: #000000;
+}
+.thinking {
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  color: #888888;
+  font-style: italic;
+}
+.message.image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  align-self: flex-end;
+}
+
+/* 对话列表样式 */
+/* 设置垂直滚动条的宽度 */
+.dialogue-list::-webkit-scrollbar {
+    width: 5px;
+    /* 调整这个值以改变滚动条的宽度 */
+}
+/* 滚动条滑块的样式 */
+.dialogue-list::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #cccccc; 
+}
+/* 滚动条轨道的样式 */
+.dialogue-list::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+    /* 滚动条轨道的颜色 */
+}
+
+
+.scroll-container::-webkit-scrollbar {
+    width: 5px;
+    /* 调整这个值以改变滚动条的宽度 */
+}
+.scroll-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #d6d6d6; 
+}
+.scroll-container::-webkit-scrollbar-track {
+    background-color: #ffffff;
+    /* 滚动条轨道的颜色 */
+}
+
+.textarea-container::-webkit-scrollbar {
+    width: 5px;
+}
+.textarea-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #cccccc; 
+}
+.textarea-container::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+}
+
+
+.models-table::-webkit-scrollbar {
+    height: 5px;
+}
+.models-table::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #cccccc; 
+}
+.models-table::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+}
+
+
+
+
+
+
+/* 定义单个对话项样式 */
+.dialogue-item {
+  width: 100%;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 12px;
+  /* background-color: #f5f5f5; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dialogue-item:hover {
+  background-color: #e5e5e5;
+}
+/* .dialogue-item:hover .edit-menu {
+  display: block;
+} */
+.dialogue-item.active {
+  background-color: #efefef;
+  color: #000000;
+}
+
+.dialogue-item .menuPopup {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dialogue-item:hover .menuPopup {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* 提示信息样式 */
+.tips-message {
+  max-width: 50%;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  border-radius: 6px;
+  padding: 8px;
+  animation: tipsMessage 0.3s ease-in-out;
+}
+
+.tips-message.error {
+  background: #fef0f0;
+  color: #f53f3f;
+}
+.tips-message.success {
+  background: #f0fff4;
+  color: #00b42a;
+}
+.tips-message.info {
+  background: #e8f3ff;
+  color: #1677ff;
+}
+.tips-message.warning {
+  background: #fff3cd;
+  color: #f59c00;
+}
+
+
+@keyframes tipsMessage {
+  0% {
+    transform: translateX(-50%) translateY(-200px);
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* 移动端侧边栏额外样式，比如fixed定位等 */
+.sidebar-fixed {
+  /* display: block; */
+  position: fixed;
+  top: 40px;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 9999;
+}
+
+/* 移动端侧边栏从左侧滑出的动画 */
+.sidebar-slide-in {
+  display: block;
+  position: fixed;
+  top: 40px;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  animation: sidebarSlideIn 0.3s ease-in-out;
+}
+
+.sidebar-slide-out {
+  animation: sidebarSlideOut 0.3s ease-in-out;
+}
+
+@keyframes sidebarSlideIn {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sidebarSlideOut {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+/* md专属样式域 */
+.markdown-body p {
+  margin: 0.5em 0;
+}
+
+.markdown-body pre {
+  padding: 12px;
+  overflow-x: auto;
+  background: #f3f3f3;
+  border-radius: 8px;
+}
+
+.markdown-body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas !important;
+  font-size: 12px !important;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 1.5em;
+  margin: 0.5em 0;
+}
+
+.markdown-body li {
+  margin: 0.25em 0;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+  margin: 0.8em 0 0.4em;
+}
+.markdown-body hr{
+  width: 100%;
+  height: 1px;
+}
+
+
+
+/* 写一个统一的输入框样式 */
+.input-box {
+  padding: 8px;
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+}
+.input-box:hover {
+  border-color: #b3b3b3;
+}
+.input-box:focus {
+  outline: none;
+}
+.input-box::placeholder {
+  color: #888888;
+}
+
+
+/* 图标hover，后面紧邻的兄弟div显示 */
+.toggle-icon:hover + .dropdown-box {
+  display: block;
+}
+
+/* 文字省略 */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
