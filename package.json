@@ -23,6 +23,7 @@
     "react-markdown": "^10.1.0",
     "rehype-highlight": "^7.0.2",
     "remark-gfm": "^4.0.1",
+    "sharp": "^0.35.5",
     "validator": "^13.15.35",
     "zustand": "^5.0.14"
   },

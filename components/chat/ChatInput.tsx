@@ -9,6 +9,7 @@ import AddSvgIcon from "@/components/ui/AddSvgIcon";
 import { HandleAddFile } from "@/utils/addFile";
 import { uploadFile } from "@/services/uploads"
 import { packMessage } from "@/utils/packMessage"
+import { useToastStore } from "@/stores/toast";
 
 
 
@@ -18,6 +19,7 @@ interface addFile {
 }
 
 export default function ChatInput() {
+  const addToast = useToastStore((state)=>state.addToast);
   const router = useRouter();
   // 认证状态管理hooks
   const { isLogin } = useAuth();
@@ -98,6 +100,14 @@ export default function ChatInput() {
      const res = await uploadFile(file)
     
     const data = await res.json()
+
+    if (!res.ok) {
+      addToast({
+        type: "error", 
+        message: data?.error ?? "上传失败",
+      }) 
+      return
+    }
 
     //浏览器有缓存，加时间戳
     const fileUrl = data?.url + `?${Date.now()}`
