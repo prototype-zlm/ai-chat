@@ -56,8 +56,8 @@ NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=
 
 # 系统提示词（可选）
-QWEN_SYSTEM_PROMPT_ROLE_RULE=
-QWEN_SYSTEM_PROMPT_THINKING_RULE=
+MODEL_SYSTEM_PROMPT_ROLE_RULE=
+MODEL_SYSTEM_PROMPT_THINKING_RULE=
 ```
 
 > `NEXTAUTH_SECRET` 用于加密 Session，可通过 `openssl rand -base64 32` 生成一个随机字符串。
@@ -86,8 +86,8 @@ npm run dev
 | `NEXTAUTH_URL` | 是 | 站点地址，本地开发为 `http://localhost:3000` |
 | `NEXTAUTH_SECRET` | 是 | NextAuth 加密密钥 |
 | `UPLOAD_DIR` | 是 | 上传文件的存储目录 |
-| `QWEN_SYSTEM_PROMPT_ROLE_RULE` | 否 | AI 角色身份系统提示词 |
-| `QWEN_SYSTEM_PROMPT_THINKING_RULE` | 否 | 推理语言规则系统提示词 |
+| `MODEL_SYSTEM_PROMPT_ROLE_RULE` | 否 | AI 角色身份系统提示词 |
+| `MODEL_SYSTEM_PROMPT_THINKING_RULE` | 否 | 推理语言规则系统提示词 |
 
 ## 常用脚本
 

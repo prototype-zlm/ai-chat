@@ -2,11 +2,11 @@ import "server-only"
 
 import { modelInfoType } from "@/types/chat";
 
-interface Body{
+export interface Body{
     model: string;
     stream: boolean;
     stream_options?: object;
-    enable_thinking: boolean;
+    enable_thinking?: boolean;
     enable_search?: boolean;
     search_options?: object;
     messages: any[];

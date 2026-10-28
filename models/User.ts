@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      default: "https://images.dog.ceo/breeds/labrador/n02099712_4705.jpg",
+      default: process.env.DEFAULT_AVATAR,
     },
     activeModel: {
       type: mongoose.Schema.Types.ObjectId,

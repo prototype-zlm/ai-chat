@@ -6,3 +6,6 @@
 !.env*.example
 next-env.d.ts
 /no-project/
+tsconfig.tsbuildinfo
+public/uploads/ai-chat/avatar/*
+public/uploads/ai-chat/files/*

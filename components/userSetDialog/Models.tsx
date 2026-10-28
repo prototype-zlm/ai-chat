@@ -61,7 +61,7 @@ export default function Models() {
       setModelList((prev) => {
         return prev.map((item) => {
           if (item._id === model.modelId) {
-            return res;
+            return res.updateModel;
           }
           return item;
         });

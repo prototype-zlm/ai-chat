@@ -48,7 +48,7 @@ export async function PUT(req: Request) {
     model,
     apiKey,
     baseUrl,
-  });
+  }, { new: true });
   return NextResponse.json({ updateModel });
 }
 //删除自定义模型

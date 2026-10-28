@@ -25,6 +25,9 @@ export function useChat() {
   const setDialogueMessage = useChatStore((state) => state.setDialogueMessage);
   const setIsLoading = useChatStore((state) => state.setIsLoading);
   const setIsCreating = useChatStore((state) => state.setIsCreating);
+  // 思考模式 / 联网搜索 开关
+  const enableThinking = useChatStore((state) => state.enableThinking);
+  const enableSearch = useChatStore((state) => state.enableSearch);
   // 当前模型
   const activeModel = useModelStore((state) => state.activeModel);
 
@@ -130,6 +133,8 @@ export function useChat() {
         body: JSON.stringify({
           message: historyMessages,
           modelInfo: activeModel,
+          enableThinking,
+          enableSearch,
         }),
       });
       if (!res.ok) {

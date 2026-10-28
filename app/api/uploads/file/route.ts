@@ -62,7 +62,7 @@ export async function POST(req: Request) {
     const buffer = Buffer.from(await file.arrayBuffer());
     // 压缩图片
     const compressedBuffer = await sharp(buffer)
-      .resize(256, 256, { fit: "cover" })
+      .resize(256, 256, { fit: "inside",withoutEnlargement: true })
       .webp({ quality: 80 })
       .toBuffer();
     // 写入文件

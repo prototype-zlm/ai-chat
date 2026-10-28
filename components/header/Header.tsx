@@ -93,6 +93,10 @@ export default function Header({
                 <li
                   className="ellipsis w-full p-2 rounded-md cursor-pointer hover:bg-gray-200"
                   onClick={() => {
+                    if (!isLogin) {
+                      router.push("/login");
+                      return;
+                    }
                     setOpenSetModel("models");
                   }}
                 >

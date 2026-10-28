@@ -10,6 +10,7 @@ import { HandleAddFile } from "@/utils/addFile";
 import { uploadFile } from "@/services/uploads"
 import { packMessage } from "@/utils/packMessage"
 import { useToastStore } from "@/stores/toast";
+import { useChatStore } from "@/stores/chat";
 
 
 
@@ -36,6 +37,12 @@ export default function ChatInput() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   //文件缩略容器引用
   const fileContainerRef = useRef<HTMLDivElement>(null);
+
+  //思考模式 / 联网搜索 开关
+  const enableThinking = useChatStore((state) => state.enableThinking);
+  const enableSearch = useChatStore((state) => state.enableSearch);
+  const setEnableThinking = useChatStore((state) => state.setEnableThinking);
+  const setEnableSearch = useChatStore((state) => state.setEnableSearch);
 
   //输入框内容改变时，自动调整高度
   const resizeTextarea = () => {
@@ -188,6 +195,33 @@ export default function ChatInput() {
             id="inputAddFile"
             onChange={handleAddFile}
           />
+        </div>
+        {/* 思考模式 / 联网搜索 开关 */}
+        <div className="absolute bottom-3 right-4 md:right-2 flex items-center gap-2">
+          <button
+            type="button"
+            title="思考模式"
+            onClick={() => setEnableThinking(!enableThinking)}
+            className={`px-2.5 py-1 rounded-md text-xs cursor-pointer transition-colors ${
+              enableThinking
+                ? "bg-gray-800 text-white"
+                : "bg-[#f2f2f2] text-gray-500 hover:bg-gray-200"
+            }`}
+          >
+            思考
+          </button>
+          <button
+            type="button"
+            title="联网搜索"
+            onClick={() => setEnableSearch(!enableSearch)}
+            className={`px-2.5 py-1 rounded-md text-xs cursor-pointer transition-colors ${
+              enableSearch
+                ? "bg-gray-800 text-white"
+                : "bg-[#f2f2f2] text-gray-500 hover:bg-gray-200"
+            }`}
+          >
+            联网
+          </button>
         </div>
       </div>
     </div>

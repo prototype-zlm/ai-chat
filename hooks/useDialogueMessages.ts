@@ -3,13 +3,14 @@ import { useChatStore } from "@/stores/chat";
 import { useParams } from "next/navigation";
 import { request } from "@/lib/request";
 import useAuth from "./useAuth";
+import { useToastStore } from "@/stores/toast";
 
 
 
 export function useDialogueMessages() {
 
   const { isLogin } = useAuth()
-
+  const addToast = useToastStore((state) => state.addToast);
   const setDialogueMessage = useChatStore((state) => state.setDialogueMessage);
   const isCreating = useChatStore((state) => state.isCreating);
   const { id: activeDialogueID } = useParams();
@@ -28,13 +29,20 @@ export function useDialogueMessages() {
       return;
     }
     async function fetchDialogueMessage() {
-      const { messages } = await request(
-        `/api/dialogues/${activeDialogueID}/message`,
-        {
-          method: "GET",
-        },
-      );
-      setDialogueMessage(messages);
+      try {
+        const { messages } = await request(
+          `/api/dialogues/${activeDialogueID}/message`,
+          {
+            method: "GET",
+          },
+        );
+        setDialogueMessage(messages);
+      } catch (error: any) {
+        addToast({
+          message: "获取对话消息失败：" + error.message,
+          type: "error",
+        })
+      }
     }
     fetchDialogueMessage();
   }, [isLogin, isCreating, activeDialogueID, setDialogueMessage]);
